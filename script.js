@@ -46,7 +46,7 @@
   function setMenu(open){
     menuBtn.setAttribute('aria-expanded', String(open));
     menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    mnav.hidden = !open;
+    mnav.classList.toggle('open', open);
   }
   menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
   mnav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
