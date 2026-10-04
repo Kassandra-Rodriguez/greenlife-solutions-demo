@@ -34,14 +34,14 @@ Sell the angle: "Your Google listing is 5.0 stars and the Website button goes no
 | w-roof-hvac, w-ac-install | Rooftop units (Lennox) on shingle and flat roofs | Real (their Facebook) |
 | cut-turf, w-turf-closeup, cut-cactus, w-patio-kitchen, w-outdoor-kitchen | Turf, desert plants, patio kitchens | **Unsplash stock, noted as stock placeholders in the footer** |
 
-Cut-outs made locally with `rembg` (u2net). `reviews-*.png` (screenshots with reviewer names) are git-ignored.
+Hero uses the full uncut turf photo. Floating cut-outs (rembg) were tried and removed: they looked cheap. `reviews-*.png` (screenshots with reviewer names) are git-ignored.
 Swap stock for their real turf and patio photos when they send some.
 
 ## Palette (sampled from the logo)
 green `#53AB22`, deep blue `#0F489B`, mid blue `#3981B8`, sun `#F4C023`, ink `#0B1B2E`.
 
 ## Design notes
-Different from earlier demos on purpose: centered headline, a floating cut-out turf "rug" bleeding off the hero, parallax
+Different from earlier demos on purpose: centered headline, a large turf-and-pavers hero photo with two tilted real photos and parallax
 floaters, colored service cards with circular photos, tilted photo strip. Inspired by the "Pepper" pizza-site reel.
 Parallax and reveals respect `prefers-reduced-motion`. EN/ES toggle included.
 
