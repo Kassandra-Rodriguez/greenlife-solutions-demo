@@ -32,7 +32,7 @@ Sell the angle: "Your Google listing is 5.0 stars and the Website button goes no
 |---|---|---|
 | w-pergola, w-fence-wall | Pergola going up; wood wall with solar caps | Real (their Facebook) |
 | w-roof-hvac, w-ac-install | Rooftop units (Lennox) on shingle and flat roofs | Real (their Facebook) |
-| cut-turf, w-turf-closeup, cut-agave, cut-cactus, w-patio-kitchen, w-outdoor-kitchen | Turf, desert plants, patio kitchens | **Unsplash stock, tagged "Stock photo" on the page** |
+| cut-turf, w-turf-closeup, cut-agave, cut-cactus, w-patio-kitchen, w-outdoor-kitchen | Turf, desert plants, patio kitchens | **Unsplash stock, noted as stock placeholders in the footer** |
 
 Cut-outs made locally with `rembg` (u2net). `reviews-*.png` (screenshots with reviewer names) are git-ignored.
 Swap stock for their real turf and patio photos when they send some.
