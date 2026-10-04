@@ -100,9 +100,9 @@ section{padding-block:clamp(3.5rem,8vw,6.5rem)}
 .card-link{margin-top:auto;align-self:flex-start;text-decoration:none;font-weight:700;background:#fff;color:var(--ink);padding:.6rem 1.1rem;border-radius:999px;font-size:.9rem}
 .card-img{position:absolute;right:-14%;bottom:-8%;width:62%;aspect-ratio:1;object-fit:cover;border-radius:50%;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);rotate:6deg;border:6px solid rgba(255,255,255,.9);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .card:hover .card-img{transform:scale(1.06) rotate(-4deg)}
-.card .c-green{background:linear-gradient(145deg,#5db82a,#2E7A12)}
+.c-green{background:linear-gradient(145deg,#2f8a14,#1a5e0b)}
 .c-navy{background:linear-gradient(145deg,#12315f,#081a33)}
-.c-blue{background:linear-gradient(145deg,#2f7bc1,#0F489B)}
+.c-blue{background:linear-gradient(145deg,#2468b0,#0c3a7e)}
 .c-sun{background:linear-gradient(145deg,#f8cd45,#e9a912);color:var(--ink)}
 .c-sun .card-link{background:var(--ink);color:#fff}
 .c-sun li::before{background:var(--ink)}
