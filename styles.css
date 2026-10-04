@@ -178,12 +178,13 @@ section{padding-block:clamp(3.5rem,8vw,6.5rem)}
 @media (max-width:640px){
   .brand img{width:104px}
   .header-actions .btn{display:none}
-  .cut-turf{width:96%}
-    .cut-cactus{right:3%;bottom:40%;width:11%}
-  .f-pergola{left:-3%;bottom:30%;width:38%}
-  .f-fence{right:-3%;bottom:38%;width:36%}
+  .hero{padding-bottom:2.2rem}
+  .hero-stage{height:clamp(250px,70vw,330px);margin-top:2.2rem}
+  .float{display:none}
+  .cut-turf{width:104%;bottom:6%}
+  .cut-cactus{right:8%;bottom:36%;width:9%}
   .badge{padding:.5rem .7rem}.badge strong{font-size:1.3rem}
-  .badge-google{left:3%;top:2%}.badge-bbb{right:3%;top:6%}
+  .badge-google{left:4%;top:0}.badge-bbb{right:4%;top:4%}
   .card{padding:1.5rem;min-height:380px}
   .card-copy{max-width:100%}
   .card-img{width:58%;right:-10%;bottom:-12%}
