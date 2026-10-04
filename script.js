@@ -41,6 +41,27 @@
     paint();
   }
 
+  /* ── mobile menu ── */
+  const menuBtn = document.getElementById('menuBtn'), mnav = document.getElementById('mobileNav');
+  function setMenu(open){
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    mnav.hidden = !open;
+  }
+  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  mnav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  document.addEventListener('click', e => { if (!e.target.closest('.site-header')) setMenu(false); });
+  matchMedia('(min-width:981px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+  /* ── reviews: duplicate cards so the phone marquee loops seamlessly ── */
+  const grid = document.getElementById('reviewGrid');
+  [...grid.children].forEach(card => {
+    const c = card.cloneNode(true);
+    c.classList.remove('reveal'); c.classList.add('in', 'review-clone'); c.setAttribute('aria-hidden', 'true');
+    grid.appendChild(c);
+  });
+
   /* ── quote form: validate, then show a demo confirmation ── */
   const form = document.getElementById('quoteForm'), msg = document.getElementById('formMsg');
   form.addEventListener('submit', e => {

@@ -29,11 +29,22 @@
       <button class="lang-toggle" id="langToggle" type="button" aria-label="Cambiar a español">
         <span class="lang-on">EN</span><span class="lang-off">ES</span>
       </button>
-      <a class="btn btn-solid btn-sm" href="tel:+19152257771">
+      <a class="btn btn-solid btn-sm btn-call" href="tel:+19152257771">
         <span data-en="Call (915) 225-7771" data-es="Llama (915) 225-7771">Call (915) 225-7771</span>
       </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile" hidden>
+    <a href="#services" data-en="Services" data-es="Servicios">Services</a>
+    <a href="#work" data-en="Our work" data-es="Trabajos">Our work</a>
+    <a href="#reviews" data-en="Reviews" data-es="Reseñas">Reviews</a>
+    <a href="#visit" data-en="Visit us" data-es="Visítanos">Visit us</a>
+    <a class="btn btn-solid" href="tel:+19152257771" data-en="Call (915) 225-7771" data-es="Llama (915) 225-7771">Call (915) 225-7771</a>
+    <a class="btn btn-ghost" href="#quote" data-en="Free estimate" data-es="Estimado gratis">Free estimate</a>
+  </nav>
 </header>
 
 <main>
@@ -190,7 +201,8 @@
       <h2 data-en="Neighbors say it best." data-es="Los vecinos lo dicen mejor.">Neighbors say it best.</h2>
     </header>
 
-    <div class="review-grid">
+    <div class="review-marquee">
+    <div class="review-grid" id="reviewGrid">
       <blockquote class="review reveal">
         <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
         <p>“Great company. They designed and built our backyard flawlessly. Sergio, the owner, took charge of everything and was very reliable and attentive. Would definitely recommend.”</p>
@@ -221,6 +233,7 @@
         <p>“Green Life Solutions was my best option in the market to work on my project. Sergio was helpful in answering my questions and went above and beyond on his recommendations…”</p>
         <footer>Jose Fernando U. <small>· Google review</small></footer>
       </blockquote>
+    </div>
     </div>
   </div>
 </section>
