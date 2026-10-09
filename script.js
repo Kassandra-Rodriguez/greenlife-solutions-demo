@@ -41,27 +41,53 @@
     paint();
   }
 
-  /* ── work strip: desktop slideshow, advances one photo at a time on its own ── */
-  const strip = document.getElementById('photoStrip');
-  const desktop = matchMedia('(min-width:981px)');
-  if (strip && !reduce){
-    [...strip.children].forEach(f => { const c = f.cloneNode(true); c.setAttribute('aria-hidden','true'); c.querySelector('img').loading = 'eager'; strip.appendChild(c); });
-    let hover = false, timer = null;
-    strip.addEventListener('mouseenter', () => hover = true);
-    strip.addEventListener('mouseleave', () => hover = false);
-    function advance(){
-      if (!desktop.matches || hover || document.hidden) return;
-      const first = strip.firstElementChild;
-      const step = strip.children[1].offsetLeft - first.offsetLeft;
-      strip.classList.add('slide');
-      strip.scrollBy({ left: step });
-      setTimeout(() => {
-        strip.classList.remove('slide');
-        strip.appendChild(first);
-        strip.scrollLeft -= step;
-      }, 900);
+  /* ── desktop work carousel (autoplay, arrows, dots, drag) ── */
+  const carousel = document.getElementById('workCarousel');
+  if (carousel){
+    const viewport = document.getElementById('carouselViewport');
+    const track = document.getElementById('carouselTrack');
+    const dotsWrap = document.getElementById('carouselDots');
+    const slides = [...track.children];
+    const count = slides.length;
+    let index = 0, timer = null;
+    const dots = slides.map((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('role','tab'); b.setAttribute('aria-label','Photo ' + (i + 1));
+      b.addEventListener('click', () => go(i, true));
+      dotsWrap.appendChild(b);
+      return b;
+    });
+    function render(){
+      track.style.transform = 'translateX(' + (-index * 100) + '%)';
+      dots.forEach((d, i) => d.setAttribute('aria-selected', i === index ? 'true' : 'false'));
     }
-    timer = setInterval(advance, 3500);
+    function go(i, user){ index = (i + count) % count; render(); if (user) restart(); }
+    function start(){ if (reduce || timer) return; timer = setInterval(() => go(index + 1), 4800); }
+    function stop(){ clearInterval(timer); timer = null; }
+    function restart(){ stop(); start(); }
+    carousel.querySelector('.carousel-next').addEventListener('click', () => go(index + 1, true));
+    carousel.querySelector('.carousel-prev').addEventListener('click', () => go(index - 1, true));
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    carousel.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight'){ go(index + 1, true); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft'){ go(index - 1, true); e.preventDefault(); }
+    });
+    let x0 = 0, dragging = false;
+    viewport.addEventListener('pointerdown', e => { dragging = true; x0 = e.clientX; stop(); track.classList.add('no-anim'); viewport.classList.add('is-grabbing'); try { viewport.setPointerCapture(e.pointerId); } catch(_){} });
+    viewport.addEventListener('pointermove', e => { if (!dragging) return; const dx = (e.clientX - x0) / viewport.offsetWidth * 100; track.style.transform = 'translateX(' + (-index * 100 + dx) + '%)'; });
+    function endDrag(e){
+      if (!dragging) return; dragging = false;
+      track.classList.remove('no-anim'); viewport.classList.remove('is-grabbing');
+      const dx = e.clientX - x0;
+      if (dx <= -45) go(index + 1, true); else if (dx >= 45) go(index - 1, true); else { render(); start(); }
+    }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    render(); start();
   }
 
   /* ── mobile menu ── */
