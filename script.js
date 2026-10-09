@@ -41,24 +41,27 @@
     paint();
   }
 
-  /* ── work strip: arrows + click-drag on desktop ── */
+  /* ── work strip: desktop slideshow, advances one photo at a time on its own ── */
   const strip = document.getElementById('photoStrip');
-  const prev = document.getElementById('stripPrev'), next = document.getElementById('stripNext');
-  if (strip && prev && next){
-    const step = () => Math.max(300, strip.clientWidth * .6);
-    const sync = () => {
-      prev.disabled = strip.scrollLeft < 8;
-      next.disabled = strip.scrollLeft > strip.scrollWidth - strip.clientWidth - 8;
-    };
-    prev.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }));
-    next.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }));
-    strip.addEventListener('scroll', sync, { passive: true });
-    addEventListener('resize', sync);
-    sync();
-    let down = false, sx = 0, sl = 0;
-    strip.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = strip.scrollLeft; });
-    addEventListener('pointermove', e => { if (!down) return; strip.classList.add('drag'); strip.scrollLeft = sl - (e.clientX - sx); });
-    addEventListener('pointerup', () => { down = false; strip.classList.remove('drag'); });
+  const desktop = matchMedia('(min-width:981px)');
+  if (strip && !reduce){
+    [...strip.children].forEach(f => { const c = f.cloneNode(true); c.setAttribute('aria-hidden','true'); c.querySelector('img').loading = 'eager'; strip.appendChild(c); });
+    let hover = false, timer = null;
+    strip.addEventListener('mouseenter', () => hover = true);
+    strip.addEventListener('mouseleave', () => hover = false);
+    function advance(){
+      if (!desktop.matches || hover || document.hidden) return;
+      const first = strip.firstElementChild;
+      const step = strip.children[1].offsetLeft - first.offsetLeft;
+      strip.classList.add('slide');
+      strip.scrollBy({ left: step });
+      setTimeout(() => {
+        strip.classList.remove('slide');
+        strip.appendChild(first);
+        strip.scrollLeft -= step;
+      }, 900);
+    }
+    timer = setInterval(advance, 3500);
   }
 
   /* ── mobile menu ── */
